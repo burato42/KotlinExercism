@@ -1,0 +1,1 @@
+/Users/burato42/Exercism/kotlin/armstrong-numbers/build/classes/kotlin/main/ArmstrongNumber.class
