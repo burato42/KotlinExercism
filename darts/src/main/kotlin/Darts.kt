@@ -1,11 +1,13 @@
+import kotlin.math.hypot
+
 object Darts {
 
     fun score(x: Number, y: Number): Int {
-        val sqrdRes = x.toFloat() * x.toFloat() + y.toFloat() * y.toFloat()
+        val sqrdRes = hypot(x.toFloat(), y.toFloat())
         return when {
             sqrdRes <= 1 -> 10
-            sqrdRes in 1.0..25.0 -> 5
-            sqrdRes in 25.0..100.0 -> 1
+            sqrdRes <= 5 -> 5
+            sqrdRes <= 10 -> 1
             else -> 0
         }
     }
