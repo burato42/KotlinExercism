@@ -7,21 +7,23 @@ object HandshakeCalculator {
     )
 
     fun calculateHandshake(number: Int): List<Signal> {
-        var level = 0
-        val res = mutableListOf<Signal>()
-        if (number >= 32) return res
-        var cur = number
-
-        while (cur > 0) {
-            level += 1
-            if (cur and 1 == 1 && level != 5) {
-                res.add(mapping[level] ?: Signal.WINK) // WTF :)
-            } else if (cur and 1 == 1 && level == 5) {
-                res.reverse()
-            }
-            cur = cur shr 1
-
-        }
-        return res
+        val handshake = Signal.values().filter { (number shr it.ordinal and 1) == 1 }
+        return if ((number and 16) != 0) handshake.reversed() else handshake
+//        var level = 0
+//        val res = mutableListOf<Signal>()
+//        if (number >= 32) return res
+//        var cur = number
+//
+//        while (cur > 0) {
+//            level += 1
+//            if (cur and 1 == 1 && level != 5) {
+//                res.add(mapping[level] ?: Signal.WINK) // WTF :)
+//            } else if (cur and 1 == 1 && level == 5) {
+//                res.reverse()
+//            }
+//            cur = cur shr 1
+//
+//        }
+//        return res
     }
 }
