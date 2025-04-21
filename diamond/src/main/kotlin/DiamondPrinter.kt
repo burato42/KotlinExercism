@@ -2,22 +2,17 @@ class DiamondPrinter {
 
     fun printToList(letter: Char): List<String> {
         val padCnt = letter.code - 'A'.code
-        var res = mutableListOf<String>()
-        for (indexedLetter in ('A'..letter).withIndex()) {
-            if (indexedLetter.value == 'A') {
-                res.add(" ".repeat(padCnt - indexedLetter.index) + "A" + " ".repeat(padCnt - indexedLetter.index))
+        val res = ('A'..letter).mapIndexed { index, c ->
+            if (c == 'A') {
+                " ".repeat(padCnt - index) + "A" + " ".repeat(padCnt - index)
             } else {
-                res.add(
-                    " ".repeat(padCnt - indexedLetter.index) + indexedLetter.value.toString() + " ".repeat(indexedLetter.index * 2 - 1) + indexedLetter.value.toString() + " ".repeat(padCnt - indexedLetter.index)
-                )
+                " ".repeat(padCnt - index) + c.toString() +
+                        " ".repeat(index * 2 - 1) +
+                        c.toString() + " ".repeat(padCnt - index)
             }
         }
 
-        if (res.size >= 1) {
-            res = (res + res.reversed().drop(1)).toMutableList()
+        return res + res.reversed().drop(1)
         }
-
-        return res
-    }
 
 }
